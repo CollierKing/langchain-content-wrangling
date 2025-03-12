@@ -1,0 +1,59 @@
+[tool.poetry]
+name = "langchain-content-wrangling"
+version = "0.1.0"
+description = ""
+authors = ["collier"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11.0,<3.12"
+
+langchain-core = "*"
+langchain-community = "*"
+pandas = "*"
+numpy = "*"
+typing = "*"
+pydantic = "2.9.2" #in order to fix langchain graph index issue https://github.com/langchain-ai/langchain/issues/29067
+networkx = "*"
+transformers = "^4.49.0"
+jupyter = "^1.1.1"
+ipywidgets = "^8.1.5"
+colorama = "^0.4.6"
+matplotlib = "^3.10.1"
+
+[tool.poetry.group.test.dependencies]
+langchain-tests = "^0.3.12"
+vcrpy = "^7.0.0"
+
+[tool.black]
+skip-string-normalization = true
+line-length = 120
+
+[tool.ruff]
+# Same as Black.  
+line-length = 120
+
+exclude = ["jupyter_notebook_config.py"]
+select = [
+    "E", # pycodestyle errors (settings from FastAPI, thanks, @tiangolo!)  
+    "W", # pycodestyle warnings  
+    "F", # pyflakes  
+    "I", # isort  
+    "C", # flake8-comprehensions  
+    "B", # flake8-bugbear  
+]
+ignore = [
+    "E501", # line too long, handled by black  
+    "C901", # too complex  
+]
+
+[tool.ruff.isort]
+order-by-type = true
+relative-imports-order = "closest-to-furthest"
+extra-standard-library = ["typing"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+known-first-party = []
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
